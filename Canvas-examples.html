@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas-examples</title>
+    <style>
+        canvas{
+            margin: 10px;
+            float: left;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="demo1" width="200" height="100" style="border:1px solid #000000;"></canvas>
+<canvas id="demo2" width="200" height="100" style="border:1px solid #000000;"></canvas>
+<canvas id="demo3" width="200" height="100" style="border:1px solid #000000;"></canvas>
+<canvas id="demo4" width="200" height="100" style="border:1px solid #000000;"></canvas>
+<canvas id="demo5" width="200" height="100" style="border:1px solid #000000;"></canvas>
+<canvas id="demo6" width="200" height="100" style="border:1px solid #000000;"></canvas>
+<img id="pic" src="img/pic1.jpg" alt="" display="none">
+<script>
+    //demo1:Canvas坐标
+    var c=document.getElementById("demo1");//找到 <canvas> 元素
+    var ctx=c.getContext("2d");//创建 context 对象
+    //(getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。)
+    ctx.fillStyle="#FF0000";
+    ctx.fillRect(0,0,150,75);//fillRect(x,y,width,height) 方法定义了矩形当前的填充方式。
+
+    //demo2:对角线
+    var c=document.getElementById("demo2");
+    var ctx=c.getContext("2d");
+    ctx.moveTo(0,0);//moveTo(x,y) 定义线条开始坐标
+    ctx.lineTo(200,100);//lineTo(x,y) 定义线条结束坐标
+    ctx.stroke();
+
+    //demo3:圆
+    var c=document.getElementById("demo3");
+    var ctx=c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(95,50,40,0,2*Math.PI);//arc(x,y,r,start,stop)画圆
+    ctx.stroke();
+
+    //demo4:文本
+    var c=document.getElementById("demo4");
+    var ctx=c.getContext("2d");
+    ctx.font="30px Arial";
+    ctx.fillText("Hello World",10,50); //fillText(text,x,y) - 在 canvas 上绘制实心的文本
+    //ctx.strokeText("Hello World",10,50); //strokeText(text,x,y) - 在 canvas 上绘制空心的文本
+
+    //demo5:渐变
+    var c=document.getElementById("demo5");
+    var ctx=c.getContext("2d");
+    // 创建渐变
+    var grd=ctx.createLinearGradient(0,0,200,0);//createLinearGradient(x,y,x1,y1) - 创建线条渐变
+    //var grd=ctx.createRadialGradient(75,50,5,90,60,100);//createRadialGradient(x,y,r,x1,y1,r1) - 创建一个径向/圆渐变
+    grd.addColorStop(0,"red");
+    grd.addColorStop(1,"white");
+    // 填充渐变
+    ctx.fillStyle=grd;
+    ctx.fillRect(10,10,150,80);
+
+    //demo6:图像
+    var c=document.getElementById("demo6");
+    var ctx=c.getContext("2d");
+    var img=document.getElementById("pic");
+    ctx.drawImage(img,10,10);//drawImage(image,x,y)把一幅图像放置到画布上
+</script>
+</body>
+</html>
